@@ -24,14 +24,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 }
-
-void MainWindow::readData()
+void MainWindow::parseData(QString incomingData)
 {
-    //qDebug() << "Receiving data packet";
     stringstream sx;
     sx << "------------- incoming event " << event_count << " ---";
     QString line = QString::fromStdString(sx.str());
     ui->serverText->append(line);
+    ui->serverText->append(incomingData);
+
+}
+
+void MainWindow::readData()
+{
+    //qDebug() << "Receiving data packet";
     QHostAddress fromIP;
     QByteArray incomingDatagram;
     
@@ -40,11 +45,10 @@ void MainWindow::readData()
         m_socket_receiver->readDatagram(incomingDatagram.data(),
                                             incomingDatagram.size(),
                                             &fromIP);
+        parseData(QString(incomingDatagram));
 
-        //qDebug() << " >>> " << incomingDatagram.data();
-        QString input = QString(incomingDatagram);
-        ui->serverText->append(input);
-        //ui->serverText->append(incomingDatagram.data());
+        //QString input = QString(incomingDatagram);
+        //ui->serverText->append(input);
     } // while
     event_count++;
 }
