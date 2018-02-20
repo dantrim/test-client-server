@@ -10,12 +10,14 @@ CONFIG       += console
 CONFIG +=c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QMAKE_MAC_SDK = macosx10.13
 
 TARGET = appWindow
 TEMPLATE = app
-LIBS += -L/usr/local/opt/boost/lib -lboost_thread-mt -lboost_filesystem -lboost_system
+#LIBS += -L/usr/local/opt/boost/lib -lboost_thread-mt -lboost_filesystem -lboost_system
+LIBS += -L/usr/local/Cellar/boost160/1.60.0/lib -lboost_thread-mt -lboost_filesystem -lboost_system
 
-boostinclude="/Users/dantrim/boost_1_60_0/"
+boostinclude="/usr/local/Cellar/boost160/1.60.0/include/"
 INCLUDEPATH+=$$boostinclude
 
 SOURCES += main.cpp\

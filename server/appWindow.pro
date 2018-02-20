@@ -11,6 +11,8 @@ CONFIG +=c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QMAKE_MAC_SDK = macosx10.13
+
 TARGET = appWindow
 TEMPLATE = app
 LIBS += -L/usr/local/opt/boost/lib -lboost_thread-mt -lboost_filesystem -lboost_system
